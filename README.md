@@ -8,7 +8,7 @@ A complete local autonomous note/tool loop agent built with:
 ## What it does
 
 Each cycle:
-1. Selects input (`prompt.txt` for first cycle, otherwise latest note in `notes/`)
+1. Selects input (`prompt.txt` every cycle)
 2. Reads input text
 3. Asks LLM to choose either:
    - `note` (directly write next note), or
@@ -141,7 +141,7 @@ pytest
 Covered:
 - timestamp filename safety
 - input file selection rules
-- latest note detection
+- latest note detection helper behavior
 - path safety
 - recursive `.txt` listing with exclusions
 - text search result structure

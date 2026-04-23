@@ -25,13 +25,10 @@ def get_latest_note_file(notes_dir: Path) -> Path | None:
     return sorted(txt_files, key=lambda p: p.name)[-1]
 
 
-def select_input_file(prompt_file: Path, notes_dir: Path) -> Path:
-    latest = get_latest_note_file(notes_dir)
-    if latest is not None:
-        return latest
+def select_input_file(prompt_file: Path) -> Path:
     if not prompt_file.exists():
         raise FileNotFoundError(
-            f"Prompt file not found at {prompt_file}. Create prompt.txt before first run."
+            f"Prompt file not found at {prompt_file}. Create prompt.txt before running the agent."
         )
     return prompt_file
 
