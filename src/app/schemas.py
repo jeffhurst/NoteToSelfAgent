@@ -6,13 +6,23 @@ from pydantic import BaseModel, Field, model_validator
 
 SUPPORTED_TOOL_NAMES = {
     "list_text_files",
+    "list_workspace_files",
     "read_text_file",
     "search_text_files",
+    "write_text_file",
+    "append_text_file",
+    "run_shell_command",
+    "web_search",
 }
 
 TOOLS_REQUIRING_NONEMPTY_INPUT = {
     "read_text_file",
     "search_text_files",
+    "list_workspace_files",
+    "write_text_file",
+    "append_text_file",
+    "run_shell_command",
+    "web_search",
 }
 
 
@@ -41,3 +51,8 @@ class DecisionOutput(BaseModel):
 
 class SynthesisOutput(BaseModel):
     note_text: str = Field(min_length=1)
+
+
+class TimestampsOutput(BaseModel):
+    run_summary: str = Field(min_length=1)
+    next_goal: str = Field(min_length=1)

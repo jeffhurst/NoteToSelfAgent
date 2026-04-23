@@ -5,6 +5,7 @@ from pathlib import Path
 
 
 TIMESTAMP_FORMAT = "%Y-%m-%d_%H-%M-%S_%f"
+TIMESTAMPS_FILENAME = "timestamps.txt"
 
 
 def ensure_notes_dir(notes_dir: Path) -> None:
@@ -31,6 +32,10 @@ def select_input_file(prompt_file: Path) -> Path:
             f"Prompt file not found at {prompt_file}. Create prompt.txt before running the agent."
         )
     return prompt_file
+
+
+def get_timestamps_file_path(notes_dir: Path) -> Path:
+    return notes_dir / TIMESTAMPS_FILENAME
 
 
 def read_utf8_text(path: Path) -> str:

@@ -2,7 +2,15 @@ from __future__ import annotations
 
 import pytest
 
-from app.tools import list_text_files, read_text_file, resolve_workspace_path, search_text_files
+from app.tools import (
+    append_text_file,
+    list_text_files,
+    read_text_file,
+    resolve_workspace_path,
+    run_shell_command,
+    search_text_files,
+    write_text_file,
+)
 
 
 def test_resolve_workspace_path_blocks_escape(tmp_path) -> None:
@@ -45,3 +53,16 @@ def test_search_text_files_returns_matches(tmp_path) -> None:
     assert result[0]["file_path"] == "one.txt"
     assert result[0]["line_number"] == 2
     assert "needles" in result[0]["line_text"].lower()
+
+
+def test_write_and_append_text_file(tmp_path) -> None:
+    message = write_text_file("notes/tool.txt", "hello", str(tmp_path))
+    assert "Wrote" in message
+    append_text_file("notes/tool.txt", " world", str(tmp_path))
+    assert (tmp_path / "notes" / "tool.txt").read_text(encoding="utf-8") == "hello world"
+
+
+def test_run_shell_command(tmp_path) -> None:
+    result = run_shell_command("python -c \"print('ok')\"", str(tmp_path))
+    assert "exit_code=0" in result
+    assert "ok" in result

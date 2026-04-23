@@ -8,12 +8,13 @@ A complete local autonomous note/tool loop agent built with:
 ## What it does
 
 Each cycle:
-1. Selects input (`prompt.txt` every cycle)
+1. Selects input (`prompt.txt` plus latest `notes/timestamps.txt` when present)
 2. Reads input text
 3. Asks LLM to choose either:
    - `note` (directly write next note), or
    - `tool` (run one tool, then synthesize next note)
 4. Writes exactly one **new timestamped** note file in `notes/`
+5. Writes/updates `notes/timestamps.txt` with a concise run summary and next goal
 
 The loop then sleeps and repeats forever.
 
@@ -97,8 +98,13 @@ Environment variables:
 ## Tools exposed to the model
 
 - `list_text_files`
+- `list_workspace_files`
 - `read_text_file`
 - `search_text_files`
+- `write_text_file`
+- `append_text_file`
+- `run_shell_command`
+- `web_search`
 
 Safety:
 - path resolution constrained to workspace root
