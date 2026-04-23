@@ -6,6 +6,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from app.url_utils import sanitize_ollama_base_url
+
 
 @dataclass(frozen=True)
 class AppConfig:
@@ -27,8 +29,10 @@ def load_config() -> AppConfig:
     prompt_file = Path(os.getenv("PROMPT_FILE", workspace_root / "prompt.txt"))
     notes_dir = Path(os.getenv("NOTES_DIR", workspace_root / "notes"))
 
+    raw_base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+
     return AppConfig(
-        ollama_base_url=os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/"),
+        ollama_base_url=sanitize_ollama_base_url(raw_base_url),
         ollama_model=os.getenv("OLLAMA_MODEL", "gemma4:e4b"),
         workspace_root=workspace_root,
         prompt_file=prompt_file,

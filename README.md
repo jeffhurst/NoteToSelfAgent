@@ -87,7 +87,7 @@ python -m app.main
 
 Environment variables:
 
-- `OLLAMA_BASE_URL` (default `http://127.0.0.1:11434`)
+- `OLLAMA_BASE_URL` (default `http://127.0.0.1:11434`; common trailing punctuation like `)` is sanitized)
 - `OLLAMA_MODEL` (default `gemma4:e4b`)
 - `WORKSPACE_ROOT` (default current working directory)
 - `PROMPT_FILE` (default `<workspace_root>/prompt.txt`)
@@ -145,3 +145,8 @@ Covered:
 - path safety
 - recursive `.txt` listing with exclusions
 - text search result structure
+
+## Error resilience
+
+- If a cycle crashes (for example network issues or malformed runtime config), the app writes a timestamped fallback error note into `notes/` and continues looping.
+- This guarantees each cycle attempt still leaves a traceable note artifact for future cycles.
