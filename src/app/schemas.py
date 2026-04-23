@@ -10,6 +10,11 @@ SUPPORTED_TOOL_NAMES = {
     "search_text_files",
 }
 
+TOOLS_REQUIRING_NONEMPTY_INPUT = {
+    "read_text_file",
+    "search_text_files",
+}
+
 
 class DecisionOutput(BaseModel):
     action: Literal["note", "tool"]
@@ -26,7 +31,10 @@ class DecisionOutput(BaseModel):
         if self.action == "tool":
             if not self.tool_name or self.tool_name not in SUPPORTED_TOOL_NAMES:
                 raise ValueError(f"tool_name must be one of {sorted(SUPPORTED_TOOL_NAMES)}")
-            if not self.tool_input or not self.tool_input.strip():
+            if (
+                self.tool_name in TOOLS_REQUIRING_NONEMPTY_INPUT
+                and (not self.tool_input or not self.tool_input.strip())
+            ):
                 raise ValueError("tool_input must be provided when action=tool")
         return self
 

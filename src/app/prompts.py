@@ -7,7 +7,9 @@ def build_decision_system_prompt() -> str:
         "Decide exactly one action: 'note' or 'tool'. "
         "Available tools: list_text_files, read_text_file, search_text_files. "
         "If a tool is needed to gather relevant information, choose 'tool', otherwise choose 'note'. "
-        "When choosing tool, pick exactly one tool and provide non-empty tool_input. "
+        "When choosing tool, pick exactly one tool. "
+        "For list_text_files, tool_input may be empty. "
+        "For read_text_file and search_text_files, tool_input must be non-empty. "
         "Return ONLY valid JSON with keys: action, reason, note_text, tool_name, tool_input. "
         "Keep reason short."
     )
