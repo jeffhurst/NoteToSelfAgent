@@ -42,3 +42,8 @@ def read_utf8_text(path: Path) -> str:
 
 def write_note_file(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
+
+
+def append_utf8_text(path: Path, content: str) -> None:
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(content)
