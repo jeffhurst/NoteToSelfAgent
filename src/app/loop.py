@@ -58,6 +58,7 @@ def run_forever(config: AppConfig) -> None:
             "tool_input": None,
             "tool_result": None,
             "output_file_path": None,
+            "timestamps_file_path": None,
             "cycle_started_at": started,
             "error": None,
         }

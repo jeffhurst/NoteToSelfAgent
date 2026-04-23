@@ -30,3 +30,16 @@ def test_tool_decision_requires_input_for_read_text_file() -> None:
                 "tool_input": "",
             }
         )
+
+
+def test_tool_decision_allows_web_search_with_input() -> None:
+    parsed = DecisionOutput.model_validate(
+        {
+            "action": "tool",
+            "reason": "search online docs",
+            "note_text": "",
+            "tool_name": "web_search",
+            "tool_input": "langgraph stategraph example",
+        }
+    )
+    assert parsed.tool_name == "web_search"

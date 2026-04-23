@@ -16,5 +16,6 @@ class AgentState(TypedDict):
     tool_input: str | None
     tool_result: str | None
     output_file_path: str | None
+    timestamps_file_path: str | None
     cycle_started_at: str
     error: str | None
