@@ -69,7 +69,7 @@ def build_cycle_graph(client: OllamaClient):
         prompt_file = Path(state["prompt_file"]) 
         notes_dir = Path(state["notes_dir"])
         ensure_notes_dir(notes_dir)
-        selected = select_input_file(prompt_file=prompt_file, notes_dir=notes_dir)
+        selected = select_input_file(prompt_file=prompt_file)
         _log(f"Selected input file: {selected}")
         return {**state, "input_file_path": str(selected)}
 
