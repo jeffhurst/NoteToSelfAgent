@@ -214,12 +214,11 @@ def build_cycle_graph(client: OllamaClient):
         content = "\n".join(lines).strip() + "\n"
         write_note_file(out_path, content)
 
-        if action == "note":
-            note_text = (state.get("note_text") or "").strip()
-            if note_text:
-                prompt_path = Path(state["prompt_file"])
-                append_utf8_text(prompt_path, f"\n{note_text}\n")
-                _log(f"Appended note_text to prompt file: {prompt_path}")
+        note_text = (state.get("note_text") or "").strip()
+        if note_text:
+            prompt_path = Path(state["prompt_file"])
+            append_utf8_text(prompt_path, f"\n{note_text}\n")
+            _log(f"Appended note_text to prompt file: {prompt_path}")
 
         _log(f"Output file written: {out_path}")
         return {**state, "output_file_path": str(out_path)}
